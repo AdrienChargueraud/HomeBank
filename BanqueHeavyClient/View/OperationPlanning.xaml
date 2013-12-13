@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="BanqueHeavyClient.View.OperationPlanning"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <DataGrid Margin="5" AlternatingRowBackground="Gainsboro" AlternationCount="2" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" 
+                  AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding OperationsPlannifiees, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding OperationSelectionPlan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Compte" Width="*" Binding="{Binding Compte}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Catégorie" Width="*" Binding="{Binding TypeCategorie}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Type opération" Width="*" Binding="{Binding TypeOperation}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Montant" Width="*" Binding="{Binding MontantOperation}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Dernière action" Width="*" Binding="{Binding DateNextOperation}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fréquence" Width="*" Binding="{Binding Frequence}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Height="25px" Margin="5px" Grid.Column="0" Grid.Row="2" Command="{Binding AddPlanOperation}">Ajouter une opération sélectionnée</Button>
+        <Button Height="25px" Margin="5px" Grid.Column="1" Grid.Row="2" Visibility="{Binding IsBoutonActif, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ModifyPlanOperation}">Modifier l'opération sélectionné</Button>
+        <Button Height="25px" Margin="5px" Grid.Column="2" Grid.Row="2" Visibility="{Binding IsBoutonActif, UpdateSourceTrigger=PropertyChanged}" Command="{Binding DeletePlanOperation}">Supprimer l'opération sélectionné</Button>
+
+    </Grid>
+</UserControl>

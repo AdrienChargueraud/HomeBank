@@ -1,0 +1,8 @@
+﻿<Window x:Class="BanqueHeavyClient.View.OrganismeUpdate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="OrganismeUpdate" Height="300" Width="300">
+    <Grid>
+        
+    </Grid>
+</Window>

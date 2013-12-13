@@ -1,0 +1,33 @@
+﻿<Window x:Class="BanqueHeavyClient.View.CategorieUpdate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Icon="../Deleket-Sleek-Xp-Basic-Money.ico"
+        Title="CategorieUpdate" Height="200" Width="350">
+    <Window.Resources>
+        <ResourceDictionary Source="../Themes/BureauBlue.xaml"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Margin="5" FontSize="20" Grid.ColumnSpan="4" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding TitreFenetre}"></Label>
+
+        <Label Margin="5" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Intitulé :</Label>
+        <TextBox Margin="5" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Text="{Binding LaCategorie.categorie_nom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Label Margin="5" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">Catégorie active :</Label>
+        <CheckBox Margin="5" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding LaCategorie.categorie_actif, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
+
+        <Button Height="25px" Margin="5" Grid.Row="3" Grid.Column="0" Command="{Binding ActionSave}" Content="{Binding TitreBouton}"></Button>
+        <Button Height="25px" Margin="5" Grid.Row="3" Grid.Column="1" Command="{Binding ActionClose}">Annuler les modifications</Button>
+    </Grid>
+</Window>

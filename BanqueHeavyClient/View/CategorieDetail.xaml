@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="BanqueHeavyClient.View.CategorieDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:toolkitInput="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400">
+        <Grid>
+        <!--<Expander x:Name="expanderAccount" Grid.Row="0" Header="Détails de la catégorie" IsExpanded="True">-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="115"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Margin="5" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">Intitulé :</Label>
+                <TextBox Margin="5" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsReadOnly="True" Text="{Binding MaCategorieSelectionne.categorie_nom, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+
+                <Label Margin="5" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Utilisation :</Label>
+                <StackPanel Orientation="Horizontal"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <toolkitInput:Rating Margin="5" Background="Transparent" ItemCount="5" IsReadOnly="True" Value="{Binding TauxUtilisationRate}" />
+                    <Label Margin="100,5,5,5" FontSize="18" Foreground="{Binding ForeColor, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Activite, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+
+                <Label Margin="5" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">Filtre :</Label>
+                <ComboBox Margin="5" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding TypeFiltre, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding ModeFiltre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+
+                <DataGrid AlternatingRowBackground="Gainsboro" AlternationCount="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"
+                      AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding OperationAssociee, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedOperation, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Date d'opération" Width="*" Binding="{Binding operation_dateOperation}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Libellé" Width="*" Binding="{Binding Categorie.categorie_nom}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Montant" Width="*" Binding="{Binding operation_montant}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        <!--</Expander>-->
+    </Grid>
+</UserControl>
