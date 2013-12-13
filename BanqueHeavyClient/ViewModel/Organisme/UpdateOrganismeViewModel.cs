@@ -118,10 +118,6 @@ namespace BanqueHeavyClient.ViewModel.Organisme
             {
                 try
                 {
-                    if (RefContexte.Organisme.Where(m => m.organisme_nom.Equals(OrganismeCreation.organisme_nom)).ToList().Count > 0)
-                    {
-                        new Erreur("Impossible d'ajouter un organisme qui existe déjà!", "Organisme", Enums.TypeErreurMessage.AVERTISSEMENT).DisplayErreur();
-                    }
                     var tmp = RefContexte.Organisme.Where(m => m.organisme_id == OrganismeCreation.organisme_id).SingleOrDefault();
                     tmp.organisme_nom = OrganismeCreation.organisme_nom;
                     tmp.organisme_abrev = OrganismeCreation.organisme_abrev;
