@@ -134,6 +134,7 @@
     <Compile Include="ViewModel\Operation\OperationViewModel.cs" />
     <Compile Include="ViewModel\Profil\ProfilViewModel.cs" />
     <Compile Include="ViewModel\RelaiCommande.cs" />
+    <Compile Include="ViewModel\Utilisateur\DetailUtilisateurViewModel.cs" />
     <Compile Include="ViewModel\Utilisateur\UtilisateurViewModel.cs" />
     <Compile Include="View\Categorie.xaml.cs">
       <DependentUpon>Categorie.xaml</DependentUpon>
