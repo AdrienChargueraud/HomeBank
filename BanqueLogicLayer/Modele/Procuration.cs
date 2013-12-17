@@ -12,20 +12,13 @@ namespace BanqueLogicLayer.Modele
     using System;
     using System.Collections.Generic;
     
-    public partial class Organisme
+    public partial class Procuration
     {
-        public Organisme()
-        {
-            this.Comptes = new HashSet<Compte>();
-        }
+        public int compte_compte_id { get; set; }
+        public int utilisateur_user_id { get; set; }
+        public int proc_droit { get; set; }
     
-        public int organisme_id { get; set; }
-        public string organisme_nom { get; set; }
-        public bool organisme_actif { get; set; }
-        public string organisme_abrev { get; set; }
-        public int Utilisateur_user_id { get; set; }
-    
-        public virtual ICollection<Compte> Comptes { get; set; }
+        public virtual Compte Compte { get; set; }
         public virtual Utilisateur Utilisateur { get; set; }
     }
 }

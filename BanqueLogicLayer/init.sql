@@ -8,16 +8,16 @@ GO
 -- Insertion d'utilisateur de test
 -- --------------------------------------------------
 
-insert into Utilisateur([user_name], [user_password]) values('Adrien', 'hDCxMgqBa2AUFBNQx/BR8fWHwck=')
-insert into Utilisateur([user_name], [user_password]) values('Toto', 'Toto')
+insert into Utilisateur([user_name], [user_password], [user_dateInscription], [user_isAdmin]) values('Adrien', 'hDCxMgqBa2AUFBNQx/BR8fWHwck=', GETDATE(), 1)
+insert into Utilisateur([user_name], [user_password], [user_dateInscription], [user_isAdmin]) values('Toto', 'hDCxMgqBa2AUFBNQx/BR8fWHwck=', GETDATE(), 0)
 
 -- --------------------------------------------------
 -- Insertion d'une liste d'organisme
 -- --------------------------------------------------
 
-insert into Organisme([organisme_nom], [organisme_abrev], [organisme_actif]) values('Crédit Agricole', 'CA', 1)
-insert into Organisme([organisme_nom], [organisme_abrev], [organisme_actif]) values('Caisse d''Epargne', 'CE', 1)
-insert into Organisme([organisme_nom], [organisme_abrev], [organisme_actif]) values('Crédit Mutuel', 'CMMC', 0)
+insert into Organisme([organisme_nom], [organisme_abrev], [organisme_actif], [Utilisateur_user_id]) values('Crédit Agricole', 'CA', 1, 1)
+insert into Organisme([organisme_nom], [organisme_abrev], [organisme_actif], [Utilisateur_user_id]) values('Caisse d''Epargne', 'CE', 1, 1)
+insert into Organisme([organisme_nom], [organisme_abrev], [organisme_actif], [Utilisateur_user_id]) values('Crédit Mutuel', 'CMMC', 0, 1)
 
 -- --------------------------------------------------
 -- Insertion d'une liste de catégorie

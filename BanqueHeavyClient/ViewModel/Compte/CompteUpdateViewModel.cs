@@ -27,9 +27,9 @@ namespace BanqueHeavyClient.ViewModel
         public CompteUpdateViewModel(int mode, CompteViewModel model)
         {
             RefContexte = SessionUtilisateur.Instance.banqueContexte;
-            ListeOrganisme = RefContexte.Organisme.Where(m => m.organisme_actif == true).ToList();
-            Mode = mode;
             CompteModele = model;
+            ListeOrganisme = RefContexte.Organisme.Where(m => m.organisme_actif == true && m.Utilisateur_user_id == CompteModele.SelectionCompte.SelectedCompte.utilisateur_user_id).ToList();
+            Mode = mode;
             LeCompte = new Compte();
             if (Mode == Convert.ToInt32(Enums.Mode.UPDATE))
             {

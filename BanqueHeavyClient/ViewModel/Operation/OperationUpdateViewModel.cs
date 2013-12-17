@@ -30,7 +30,7 @@ namespace BanqueHeavyClient.ViewModel
             CompteVm = compteVm;
             OperationToCreate = new Operation();
             OperationToCreate.operation_date = DateTime.Now;
-            ListeCategories = RefContexte.Categorie.Where(m => m.categorie_actif == true && m.utilisateur_user_id == SessionUtilisateur.Instance.ConnectedUser.user_id).ToList();
+            ListeCategories = RefContexte.Categorie.Where(m => m.categorie_actif == true && m.utilisateur_user_id == CompteVm.SelectedCompte.utilisateur_user_id).ToList();
             ListeType = new List<String>();
             ListeType.Add("Crédit");
             ListeType.Add("Débit");

@@ -31,5 +31,6 @@ namespace BanqueLogicLayer.Modele
         public DbSet<Categorie> Categorie { get; set; }
         public DbSet<Utilisateur> Utilisateur { get; set; }
         public DbSet<OperationPlanning> OperationPlanning { get; set; }
+        public DbSet<Procuration> Procuration { get; set; }
     }
 }

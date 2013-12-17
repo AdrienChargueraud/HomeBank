@@ -51,7 +51,7 @@ namespace BanqueHeavyClient.ViewModel.Organisme
         public void ExtractAllOrganisme()
         {
             OrganismeReferentiel = new ObservableCollection<DetailOrganismeViewModel>();
-            foreach (var org in RefContexte.Organisme.ToList())
+            foreach (var org in RefContexte.Organisme.Where(m => m.Utilisateur_user_id == SessionUtilisateur.Instance.ConnectedUser.user_id).ToList())
                 OrganismeReferentiel.Add(new DetailOrganismeViewModel(org));
             OnPropertyChanged("OrganismeReferentiel");
         }

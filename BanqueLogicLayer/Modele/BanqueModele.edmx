@@ -5,188 +5,249 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Banque.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="BanqueStoreContainer">
-          <EntitySet Name="Categorie" EntityType="Banque.Store.Categorie" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Compte" EntityType="Banque.Store.Compte" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Operation" EntityType="Banque.Store.Operation" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="OperationPlanning" EntityType="Banque.Store.OperationPlanning" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Organisme" EntityType="Banque.Store.Organisme" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Utilisateur" EntityType="Banque.Store.Utilisateur" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_CatégorieOperation" Association="Banque.Store.FK_CatégorieOperation">
-            <End Role="Categorie" EntitySet="Categorie" />
-            <End Role="Operation" EntitySet="Operation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CategorieOperationPlanning" Association="Banque.Store.FK_CategorieOperationPlanning">
-            <End Role="Categorie" EntitySet="Categorie" />
-            <End Role="OperationPlanning" EntitySet="OperationPlanning" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompteOperation" Association="Banque.Store.FK_CompteOperation">
-            <End Role="Compte" EntitySet="Compte" />
-            <End Role="Operation" EntitySet="Operation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompteOperationPlanning" Association="Banque.Store.FK_CompteOperationPlanning">
-            <End Role="Compte" EntitySet="Compte" />
-            <End Role="OperationPlanning" EntitySet="OperationPlanning" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrganismeCompte" Association="Banque.Store.FK_OrganismeCompte">
-            <End Role="Organisme" EntitySet="Organisme" />
-            <End Role="Compte" EntitySet="Compte" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UtilisateurCategorie" Association="Banque.Store.FK_UtilisateurCategorie">
-            <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="Categorie" EntitySet="Categorie" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UtilisateurCompte" Association="Banque.Store.FK_UtilisateurCompte">
-            <End Role="Utilisateur" EntitySet="Utilisateur" />
-            <End Role="Compte" EntitySet="Compte" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Categorie">
-          <Key>
-            <PropertyRef Name="categorie_id" />
-          </Key>
-          <Property Name="categorie_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="categorie_nom" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="categorie_actif" Type="bit" Nullable="false" />
-          <Property Name="utilisateur_user_id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Compte">
-          <Key>
-            <PropertyRef Name="compte_id" />
-          </Key>
-          <Property Name="compte_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="compte_numero" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="organisme_organisme_id" Type="int" Nullable="false" />
-          <Property Name="utilisateur_user_id" Type="int" Nullable="false" />
-          <Property Name="compte_interet" Type="float" Nullable="false" />
-          <Property Name="compte_dateOuverture" Type="datetime" Nullable="false" />
-          <Property Name="compte_soldeDepart" Type="float" Nullable="false" />
-          <Property Name="compte_soldeCourant" Type="float" Nullable="false" />
-          <Property Name="compte_nom" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Operation">
-          <Key>
-            <PropertyRef Name="operation_id" />
-          </Key>
-          <Property Name="operation_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="operation_montant" Type="float" Nullable="false" />
-          <Property Name="operation_date" Type="datetime" Nullable="false" />
-          <Property Name="compte_compte_id" Type="int" Nullable="false" />
-          <Property Name="categorie_categorie_id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="OperationPlanning">
-          <Key>
-            <PropertyRef Name="opeplan_id" />
-          </Key>
-          <Property Name="opeplan_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="opeplan_frequence" Type="int" Nullable="false" />
-          <Property Name="opeplan_dateOperation" Type="datetime" Nullable="false" />
-          <Property Name="opeplan_montant" Type="float" Nullable="false" />
-          <Property Name="compte_compte_id" Type="int" Nullable="false" />
-          <Property Name="categorie_categorie_id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Organisme">
-          <Key>
-            <PropertyRef Name="organisme_id" />
-          </Key>
-          <Property Name="organisme_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="organisme_nom" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="organisme_actif" Type="bit" Nullable="false" />
-          <Property Name="organisme_abrev" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Utilisateur">
-          <Key>
-            <PropertyRef Name="user_id" />
-          </Key>
-          <Property Name="user_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="user_name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="user_password" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_CatégorieOperation">
-          <End Role="Categorie" Type="Banque.Store.Categorie" Multiplicity="1" />
-          <End Role="Operation" Type="Banque.Store.Operation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categorie">
-              <PropertyRef Name="categorie_id" />
-            </Principal>
-            <Dependent Role="Operation">
-              <PropertyRef Name="categorie_categorie_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CategorieOperationPlanning">
-          <End Role="Categorie" Type="Banque.Store.Categorie" Multiplicity="1" />
-          <End Role="OperationPlanning" Type="Banque.Store.OperationPlanning" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categorie">
-              <PropertyRef Name="categorie_id" />
-            </Principal>
-            <Dependent Role="OperationPlanning">
-              <PropertyRef Name="categorie_categorie_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompteOperation">
-          <End Role="Compte" Type="Banque.Store.Compte" Multiplicity="1" />
-          <End Role="Operation" Type="Banque.Store.Operation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Compte">
-              <PropertyRef Name="compte_id" />
-            </Principal>
-            <Dependent Role="Operation">
-              <PropertyRef Name="compte_compte_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompteOperationPlanning">
-          <End Role="Compte" Type="Banque.Store.Compte" Multiplicity="1" />
-          <End Role="OperationPlanning" Type="Banque.Store.OperationPlanning" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Compte">
-              <PropertyRef Name="compte_id" />
-            </Principal>
-            <Dependent Role="OperationPlanning">
-              <PropertyRef Name="compte_compte_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrganismeCompte">
-          <End Role="Organisme" Type="Banque.Store.Organisme" Multiplicity="1" />
-          <End Role="Compte" Type="Banque.Store.Compte" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organisme">
-              <PropertyRef Name="organisme_id" />
-            </Principal>
-            <Dependent Role="Compte">
-              <PropertyRef Name="organisme_organisme_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UtilisateurCategorie">
-          <End Role="Utilisateur" Type="Banque.Store.Utilisateur" Multiplicity="1" />
-          <End Role="Categorie" Type="Banque.Store.Categorie" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilisateur">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="Categorie">
-              <PropertyRef Name="utilisateur_user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UtilisateurCompte">
-          <End Role="Utilisateur" Type="Banque.Store.Utilisateur" Multiplicity="1" />
-          <End Role="Compte" Type="Banque.Store.Compte" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilisateur">
-              <PropertyRef Name="user_id" />
-            </Principal>
-            <Dependent Role="Compte">
-              <PropertyRef Name="utilisateur_user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema></edmx:StorageModels>
+  <EntityContainer Name="BanqueStoreContainer">
+    <EntitySet Name="Organisme" EntityType="Banque.Store.Organisme" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Compte" EntityType="Banque.Store.Compte" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Operation" EntityType="Banque.Store.Operation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categorie" EntityType="Banque.Store.Categorie" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Utilisateur" EntityType="Banque.Store.Utilisateur" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OperationPlanning" EntityType="Banque.Store.OperationPlanning" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Procuration" EntityType="Banque.Store.Procuration" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="OrganismeCompte" Association="Banque.Store.OrganismeCompte">
+      <End Role="Organisme" EntitySet="Organisme" />
+      <End Role="Compte" EntitySet="Compte" />
+    </AssociationSet>
+    <AssociationSet Name="CompteOperation" Association="Banque.Store.CompteOperation">
+      <End Role="Compte" EntitySet="Compte" />
+      <End Role="Operation" EntitySet="Operation" />
+    </AssociationSet>
+    <AssociationSet Name="CatégorieOperation" Association="Banque.Store.CatégorieOperation">
+      <End Role="Catégorie" EntitySet="Categorie" />
+      <End Role="Operation" EntitySet="Operation" />
+    </AssociationSet>
+    <AssociationSet Name="UtilisateurCompte" Association="Banque.Store.UtilisateurCompte">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Compte" EntitySet="Compte" />
+    </AssociationSet>
+    <AssociationSet Name="CompteOperationPlanning" Association="Banque.Store.CompteOperationPlanning">
+      <End Role="Compte" EntitySet="Compte" />
+      <End Role="OperationPlanning" EntitySet="OperationPlanning" />
+    </AssociationSet>
+    <AssociationSet Name="CategorieOperationPlanning" Association="Banque.Store.CategorieOperationPlanning">
+      <End Role="Categorie" EntitySet="Categorie" />
+      <End Role="OperationPlanning" EntitySet="OperationPlanning" />
+    </AssociationSet>
+    <AssociationSet Name="UtilisateurCategorie" Association="Banque.Store.UtilisateurCategorie">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Categorie" EntitySet="Categorie" />
+    </AssociationSet>
+    <AssociationSet Name="CompteProcuration" Association="Banque.Store.CompteProcuration">
+      <End Role="Compte" EntitySet="Compte" />
+      <End Role="Procuration" EntitySet="Procuration" />
+    </AssociationSet>
+    <AssociationSet Name="UtilisateurProcuration" Association="Banque.Store.UtilisateurProcuration">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Procuration" EntitySet="Procuration" />
+    </AssociationSet>
+    <AssociationSet Name="UtilisateurOrganisme" Association="Banque.Store.UtilisateurOrganisme">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Organisme" EntitySet="Organisme" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Organisme">
+    <Key>
+      <PropertyRef Name="organisme_id" />
+    </Key>
+    <Property Name="organisme_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="organisme_nom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="organisme_actif" Type="bit" Nullable="false" />
+    <Property Name="organisme_abrev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Utilisateur_user_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Compte">
+    <Key>
+      <PropertyRef Name="compte_id" />
+    </Key>
+    <Property Name="compte_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="compte_numero" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="organisme_organisme_id" Type="int" Nullable="false" />
+    <Property Name="utilisateur_user_id" Type="int" Nullable="false" />
+    <Property Name="compte_interet" Type="float" Nullable="false" />
+    <Property Name="compte_dateOuverture" Type="datetime" Nullable="false" />
+    <Property Name="compte_soldeDepart" Type="float" Nullable="false" />
+    <Property Name="compte_soldeCourant" Type="float" Nullable="false" />
+    <Property Name="compte_nom" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Operation">
+    <Key>
+      <PropertyRef Name="operation_id" />
+    </Key>
+    <Property Name="operation_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="operation_montant" Type="float" Nullable="false" />
+    <Property Name="operation_date" Type="datetime" Nullable="false" />
+    <Property Name="compte_compte_id" Type="int" Nullable="false" />
+    <Property Name="categorie_categorie_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categorie">
+    <Key>
+      <PropertyRef Name="categorie_id" />
+    </Key>
+    <Property Name="categorie_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="categorie_nom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="categorie_actif" Type="bit" Nullable="false" />
+    <Property Name="utilisateur_user_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="user_password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="user_dateInscription" Type="datetime" Nullable="false" />
+    <Property Name="user_isAdmin" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OperationPlanning">
+    <Key>
+      <PropertyRef Name="opeplan_id" />
+    </Key>
+    <Property Name="opeplan_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="opeplan_frequence" Type="int" Nullable="false" />
+    <Property Name="opeplan_dateOperation" Type="datetime" Nullable="false" />
+    <Property Name="opeplan_montant" Type="float" Nullable="false" />
+    <Property Name="compte_compte_id" Type="int" Nullable="false" />
+    <Property Name="categorie_categorie_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Procuration">
+    <Key>
+      <PropertyRef Name="compte_compte_id" />
+      <PropertyRef Name="utilisateur_user_id" />
+    </Key>
+    <Property Name="compte_compte_id" Type="int" Nullable="false" />
+    <Property Name="utilisateur_user_id" Type="int" Nullable="false" />
+    <Property Name="proc_droit" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="OrganismeCompte">
+    <End Role="Organisme" Type="Banque.Store.Organisme" Multiplicity="1" />
+    <End Role="Compte" Type="Banque.Store.Compte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organisme">
+        <PropertyRef Name="organisme_id" />
+      </Principal>
+      <Dependent Role="Compte">
+        <PropertyRef Name="organisme_organisme_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompteOperation">
+    <End Role="Compte" Type="Banque.Store.Compte" Multiplicity="1" />
+    <End Role="Operation" Type="Banque.Store.Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compte">
+        <PropertyRef Name="compte_id" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="compte_compte_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CatégorieOperation">
+    <End Role="Catégorie" Type="Banque.Store.Categorie" Multiplicity="1" />
+    <End Role="Operation" Type="Banque.Store.Operation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Catégorie">
+        <PropertyRef Name="categorie_id" />
+      </Principal>
+      <Dependent Role="Operation">
+        <PropertyRef Name="categorie_categorie_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UtilisateurCompte">
+    <End Role="Utilisateur" Type="Banque.Store.Utilisateur" Multiplicity="1" />
+    <End Role="Compte" Type="Banque.Store.Compte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Compte">
+        <PropertyRef Name="utilisateur_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompteOperationPlanning">
+    <End Role="Compte" Type="Banque.Store.Compte" Multiplicity="1" />
+    <End Role="OperationPlanning" Type="Banque.Store.OperationPlanning" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compte">
+        <PropertyRef Name="compte_id" />
+      </Principal>
+      <Dependent Role="OperationPlanning">
+        <PropertyRef Name="compte_compte_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategorieOperationPlanning">
+    <End Role="Categorie" Type="Banque.Store.Categorie" Multiplicity="1" />
+    <End Role="OperationPlanning" Type="Banque.Store.OperationPlanning" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="categorie_id" />
+      </Principal>
+      <Dependent Role="OperationPlanning">
+        <PropertyRef Name="categorie_categorie_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UtilisateurCategorie">
+    <End Role="Utilisateur" Type="Banque.Store.Utilisateur" Multiplicity="1" />
+    <End Role="Categorie" Type="Banque.Store.Categorie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Categorie">
+        <PropertyRef Name="utilisateur_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompteProcuration">
+    <End Role="Compte" Type="Banque.Store.Compte" Multiplicity="1" />
+    <End Role="Procuration" Type="Banque.Store.Procuration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compte">
+        <PropertyRef Name="compte_id" />
+      </Principal>
+      <Dependent Role="Procuration">
+        <PropertyRef Name="compte_compte_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UtilisateurProcuration">
+    <End Role="Utilisateur" Type="Banque.Store.Utilisateur" Multiplicity="1" />
+    <End Role="Procuration" Type="Banque.Store.Procuration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Procuration">
+        <PropertyRef Name="utilisateur_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UtilisateurOrganisme">
+    <End Role="Utilisateur" Type="Banque.Store.Utilisateur" Multiplicity="1" />
+    <End Role="Organisme" Type="Banque.Store.Organisme" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="Organisme">
+        <PropertyRef Name="Utilisateur_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Banque" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
@@ -225,6 +286,19 @@
             <End Role="Utilisateur" EntitySet="Utilisateur" />
             <End Role="Categorie" EntitySet="Categorie" />
           </AssociationSet>
+          <EntitySet Name="Procuration" EntityType="Banque.Procuration" />
+          <AssociationSet Name="CompteProcuration" Association="Banque.CompteProcuration">
+            <End Role="Compte" EntitySet="Compte" />
+            <End Role="Procuration" EntitySet="Procuration" />
+          </AssociationSet>
+          <AssociationSet Name="UtilisateurProcuration" Association="Banque.UtilisateurProcuration">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Procuration" EntitySet="Procuration" />
+          </AssociationSet>
+          <AssociationSet Name="UtilisateurOrganisme" Association="Banque.UtilisateurOrganisme">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Organisme" EntitySet="Organisme" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Organisme">
           <Key>
@@ -235,6 +309,8 @@
           <Property Type="Boolean" Name="organisme_actif" Nullable="false" />
           <NavigationProperty Name="Comptes" Relationship="Banque.OrganismeCompte" FromRole="Organisme" ToRole="Compte" />
           <Property Type="String" Name="organisme_abrev" Nullable="false" />
+          <NavigationProperty Name="Utilisateur" Relationship="Banque.UtilisateurOrganisme" FromRole="Organisme" ToRole="Utilisateur" />
+          <Property Type="Int32" Name="Utilisateur_user_id" Nullable="false" />
         </EntityType>
         <EntityType Name="Compte">
           <Key>
@@ -253,6 +329,7 @@
           <Property Type="Double" Name="compte_soldeCourant" Nullable="false" />
           <Property Type="String" Name="compte_nom" Nullable="false" />
           <NavigationProperty Name="OperationsPlanning" Relationship="Banque.CompteOperationPlanning" FromRole="Compte" ToRole="OperationPlanning" />
+          <NavigationProperty Name="Procurations" Relationship="Banque.CompteProcuration" FromRole="Compte" ToRole="Procuration" />
         </EntityType>
         <Association Name="OrganismeCompte">
           <End Type="Banque.Organisme" Role="Organisme" Multiplicity="1" />
@@ -323,6 +400,10 @@
           <Property Type="String" Name="user_password" Nullable="false" />
           <NavigationProperty Name="Comptes" Relationship="Banque.UtilisateurCompte" FromRole="Utilisateur" ToRole="Compte" />
           <NavigationProperty Name="Categories" Relationship="Banque.UtilisateurCategorie" FromRole="Utilisateur" ToRole="Categorie" />
+          <Property Type="DateTime" Name="user_dateInscription" Nullable="false" />
+          <NavigationProperty Name="Procurations" Relationship="Banque.UtilisateurProcuration" FromRole="Utilisateur" ToRole="Procuration" />
+          <Property Type="Boolean" Name="user_isAdmin" Nullable="false" />
+          <NavigationProperty Name="Organismes" Relationship="Banque.UtilisateurOrganisme" FromRole="Utilisateur" ToRole="Organisme" />
         </EntityType>
         <Association Name="UtilisateurCompte">
           <End Type="Banque.Utilisateur" Role="Utilisateur" Multiplicity="1" />
@@ -385,6 +466,53 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Procuration">
+          <Key>
+            <PropertyRef Name="compte_compte_id" />
+            <PropertyRef Name="utilisateur_user_id" />
+          </Key>
+          <NavigationProperty Name="Compte" Relationship="Banque.CompteProcuration" FromRole="Procuration" ToRole="Compte" />
+          <Property Type="Int32" Name="compte_compte_id" Nullable="false" />
+          <NavigationProperty Name="Utilisateur" Relationship="Banque.UtilisateurProcuration" FromRole="Procuration" ToRole="Utilisateur" />
+          <Property Type="Int32" Name="utilisateur_user_id" Nullable="false" />
+          <Property Type="Int32" Name="proc_droit" Nullable="false" />
+        </EntityType>
+        <Association Name="CompteProcuration">
+          <End Type="Banque.Compte" Role="Compte" Multiplicity="1" />
+          <End Type="Banque.Procuration" Role="Procuration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compte">
+              <PropertyRef Name="compte_id" />
+            </Principal>
+            <Dependent Role="Procuration">
+              <PropertyRef Name="compte_compte_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UtilisateurProcuration">
+          <End Type="Banque.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="Banque.Procuration" Role="Procuration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Procuration">
+              <PropertyRef Name="utilisateur_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UtilisateurOrganisme">
+          <End Type="Banque.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="Banque.Organisme" Role="Organisme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="Organisme">
+              <PropertyRef Name="Utilisateur_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -398,6 +526,7 @@
           <ScalarProperty Name="organisme_nom" ColumnName="organisme_nom" />
           <ScalarProperty Name="organisme_actif" ColumnName="organisme_actif" />
           <ScalarProperty Name="organisme_abrev" ColumnName="organisme_abrev" />
+          <ScalarProperty Name="Utilisateur_user_id" ColumnName="Utilisateur_user_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -443,6 +572,8 @@
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="user_name" ColumnName="user_name" />
           <ScalarProperty Name="user_password" ColumnName="user_password" />
+          <ScalarProperty Name="user_dateInscription" ColumnName="user_dateInscription" />
+          <ScalarProperty Name="user_isAdmin" ColumnName="user_isAdmin" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -455,6 +586,15 @@
           <ScalarProperty Name="opeplan_montant" ColumnName="opeplan_montant" />
           <ScalarProperty Name="compte_compte_id" ColumnName="compte_compte_id" />
           <ScalarProperty Name="categorie_categorie_id" ColumnName="categorie_categorie_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Procuration">
+      <EntityTypeMapping TypeName="IsTypeOf(Banque.Procuration)">
+        <MappingFragment StoreEntitySet="Procuration">
+          <ScalarProperty Name="compte_compte_id" ColumnName="compte_compte_id" />
+          <ScalarProperty Name="utilisateur_user_id" ColumnName="utilisateur_user_id" />
+          <ScalarProperty Name="proc_droit" ColumnName="proc_droit" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -473,14 +613,13 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="Model1" >
         <EntityTypeShape EntityType="Banque.Organisme" Width="2.25" PointX="1.5" PointY="2.125" Height="1.9802864583333335" />
-        <EntityTypeShape EntityType="Banque.Compte" Width="2.625" PointX="4.75" PointY="1.5" Height="3.5186979166666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="Banque.Compte" Width="2.625" PointX="4.75" PointY="1.5" Height="3.3263964843749996" IsExpanded="true" />
         <AssociationConnector Association="Banque.OrganismeCompte">
           <ConnectorPoint PointX="3.75" PointY="3.1151432291666667" />
           <ConnectorPoint PointX="4.75" PointY="3.1151432291666667" />
@@ -490,31 +629,53 @@
           <ConnectorPoint PointX="7.375" PointY="2.2449446614583328" />
           <ConnectorPoint PointX="8.25" PointY="2.2449446614583328" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="Banque.Categorie" Width="2.625" PointX="10.125" PointY="6.375" Height="1.9802864583333326" />
-        <AssociationConnector Association="Banque.CatégorieOperation" ManuallyRouted="true">
-          <ConnectorPoint PointX="12.75" PointY="7.3651432291666659" />
-          <ConnectorPoint PointX="13.3671875" PointY="7.3651432291666659" />
-          <ConnectorPoint PointX="13.3671875" PointY="3.3295564453125" />
-          <ConnectorPoint PointX="8.46875" PointY="3.3295564453125" />
-          <ConnectorPoint PointX="8.46875" PointY="2.9898893229166661" />
+        <EntityTypeShape EntityType="Banque.Categorie" Width="2.625" PointX="9.125" PointY="7" Height="2.3648893229166674" />
+        <AssociationConnector Association="Banque.CatégorieOperation" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.125" PointY="8.5675708740234384" />
+          <ConnectorPoint PointX="8.53125" PointY="8.5675708740234384" />
+          <ConnectorPoint PointX="8.53125" PointY="2.9898893229166661" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="Banque.Utilisateur" Width="2.75" PointX="8.75" PointY="3.625" Height="1.7879850260416665" IsExpanded="true" />
+        <EntityTypeShape EntityType="Banque.Utilisateur" Width="2.75" PointX="8.875" PointY="3.625" Height="2.5571907552083326" IsExpanded="true" />
         <AssociationConnector Association="Banque.UtilisateurCompte">
-          <ConnectorPoint PointX="8.75" PointY="4.3218489583333328" />
-          <ConnectorPoint PointX="7.375" PointY="4.3218489583333328" />
+          <ConnectorPoint PointX="8.875" PointY="4.4179996744791659" />
+          <ConnectorPoint PointX="8.6145833333333339" PointY="4.417999674479165" />
+          <ConnectorPoint PointX="8.4479166666666661" PointY="4.4179996744791659" />
+          <ConnectorPoint PointX="7.375" PointY="4.4179996744791659" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="Banque.OperationPlanning" Width="2.5" PointX="4.75" PointY="5.75" Height="1.7879850260416665" />
+        <EntityTypeShape EntityType="Banque.OperationPlanning" Width="2.5" PointX="4.75" PointY="6" Height="2.5571907552083335" />
         <AssociationConnector Association="Banque.CompteOperationPlanning">
-          <ConnectorPoint PointX="6" PointY="5.0186979166666656" />
-          <ConnectorPoint PointX="6" PointY="5.75" />
+          <ConnectorPoint PointX="6" PointY="5.2109993489583326" />
+          <ConnectorPoint PointX="6" PointY="6" />
         </AssociationConnector>
         <AssociationConnector Association="Banque.CategorieOperationPlanning">
-          <ConnectorPoint PointX="10.125" PointY="6.8075716145833329" />
-          <ConnectorPoint PointX="7.25" PointY="6.8075716145833329" />
+          <ConnectorPoint PointX="9.125" PointY="7.7077474251302087" />
+          <ConnectorPoint PointX="8.6145833333333339" PointY="7.7077474251302078" />
+          <ConnectorPoint PointX="8.4479166666666661" PointY="7.7077474251302087" />
+          <ConnectorPoint PointX="7.25" PointY="7.7077474251302087" />
         </AssociationConnector>
         <AssociationConnector Association="Banque.UtilisateurCategorie">
-          <ConnectorPoint PointX="10.8125" PointY="5.6052864583333326" />
-          <ConnectorPoint PointX="10.8125" PointY="6.375" />
+          <ConnectorPoint PointX="10.375" PointY="6.1821907552083326" />
+          <ConnectorPoint PointX="10.375" PointY="7" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Banque.Procuration" Width="1.5" PointX="12.875" PointY="3" Height="1.9802864583333326" />
+        <AssociationConnector Association="Banque.CompteProcuration">
+          <ConnectorPoint PointX="7.375" PointY="3.28125" />
+          <ConnectorPoint PointX="8.4479166666666661" PointY="3.2812499999999996" />
+          <ConnectorPoint PointX="8.6145833333333339" PointY="3.28125" />
+          <ConnectorPoint PointX="12.875" PointY="3.28125" />
+        </AssociationConnector>
+        <AssociationConnector Association="Banque.UtilisateurProcuration">
+          <ConnectorPoint PointX="11.625" PointY="4.3026432291666659" />
+          <ConnectorPoint PointX="12.875" PointY="4.3026432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="Banque.UtilisateurOrganisme">
+          <ConnectorPoint PointX="8.875" PointY="5.6054996744791659" />
+          <ConnectorPoint PointX="8.6145833333333339" PointY="5.605499674479165" />
+          <ConnectorPoint PointX="8.4479166666666661" PointY="5.6054996744791659" />
+          <ConnectorPoint PointX="6.083333333333333" PointY="5.605499674479165" />
+          <ConnectorPoint PointX="5.916666666666667" PointY="5.6054996744791659" />
+          <ConnectorPoint PointX="2.625" PointY="5.6054996744791659" />
+          <ConnectorPoint PointX="2.625" PointY="4.4898893229166656" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>

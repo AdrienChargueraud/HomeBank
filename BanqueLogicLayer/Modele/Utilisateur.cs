@@ -18,13 +18,19 @@ namespace BanqueLogicLayer.Modele
         {
             this.Comptes = new HashSet<Compte>();
             this.Categories = new HashSet<Categorie>();
+            this.Procurations = new HashSet<Procuration>();
+            this.Organismes = new HashSet<Organisme>();
         }
     
         public int user_id { get; set; }
         public string user_name { get; set; }
         public string user_password { get; set; }
+        public System.DateTime user_dateInscription { get; set; }
+        public bool user_isAdmin { get; set; }
     
         public virtual ICollection<Compte> Comptes { get; set; }
         public virtual ICollection<Categorie> Categories { get; set; }
+        public virtual ICollection<Procuration> Procurations { get; set; }
+        public virtual ICollection<Organisme> Organismes { get; set; }
     }
 }

@@ -71,12 +71,6 @@
     <Compile Include="Modele\Compte.cs">
       <DependentUpon>BanqueModele.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modele\Entity\Categorie.cs" />
-    <Compile Include="Modele\Entity\Compte.cs" />
-    <Compile Include="Modele\Entity\Operation.cs" />
-    <Compile Include="Modele\Entity\OperationPlanning.cs" />
-    <Compile Include="Modele\Entity\Organisme.cs" />
-    <Compile Include="Modele\Entity\Utilisateur.cs" />
     <Compile Include="Modele\Operation.cs">
       <DependentUpon>BanqueModele.tt</DependentUpon>
     </Compile>
@@ -84,6 +78,9 @@
       <DependentUpon>BanqueModele.tt</DependentUpon>
     </Compile>
     <Compile Include="Modele\Organisme.cs">
+      <DependentUpon>BanqueModele.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modele\Procuration.cs">
       <DependentUpon>BanqueModele.tt</DependentUpon>
     </Compile>
     <Compile Include="Modele\Utilisateur.cs">
@@ -113,7 +110,6 @@
   <ItemGroup>
     <Content Include="init.sql" />
     <Content Include="Modele\BanqueModele.edmx.sql" />
-    <Content Include="Procedure\CompteExisteInsertion.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

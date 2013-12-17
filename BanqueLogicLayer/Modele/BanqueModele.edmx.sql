@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/16/2013 11:55:18
--- Generated from EDMX file: C:\Users\achargueraud\Documents\GitHub\HomeBank\BanqueLogicLayer\Modele\BanqueModele.edmx
+-- Date Created: 12/17/2013 15:56:27
+-- Generated from EDMX file: C:\Users\achargueraud\Downloads\MyMiniUtility\MyMiniUtility\BanqueLogicLayer\Modele\BanqueModele.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,34 +17,40 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_CatégorieOperation]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Operation] DROP CONSTRAINT [FK_CatégorieOperation];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CategorieOperationPlanning]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OperationPlanning] DROP CONSTRAINT [FK_CategorieOperationPlanning];
+IF OBJECT_ID(N'[dbo].[FK_OrganismeCompte]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Compte] DROP CONSTRAINT [FK_OrganismeCompte];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CompteOperation]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Operation] DROP CONSTRAINT [FK_CompteOperation];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CatégorieOperation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Operation] DROP CONSTRAINT [FK_CatégorieOperation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UtilisateurCompte]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Compte] DROP CONSTRAINT [FK_UtilisateurCompte];
+GO
 IF OBJECT_ID(N'[dbo].[FK_CompteOperationPlanning]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[OperationPlanning] DROP CONSTRAINT [FK_CompteOperationPlanning];
 GO
-IF OBJECT_ID(N'[dbo].[FK_OrganismeCompte]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Compte] DROP CONSTRAINT [FK_OrganismeCompte];
+IF OBJECT_ID(N'[dbo].[FK_CategorieOperationPlanning]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OperationPlanning] DROP CONSTRAINT [FK_CategorieOperationPlanning];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UtilisateurCategorie]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Categorie] DROP CONSTRAINT [FK_UtilisateurCategorie];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UtilisateurCompte]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Compte] DROP CONSTRAINT [FK_UtilisateurCompte];
+IF OBJECT_ID(N'[dbo].[FK_CompteProcuration]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Procuration] DROP CONSTRAINT [FK_CompteProcuration];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UtilisateurProcuration]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Procuration] DROP CONSTRAINT [FK_UtilisateurProcuration];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Categorie]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Categorie];
+IF OBJECT_ID(N'[dbo].[Organisme]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Organisme];
 GO
 IF OBJECT_ID(N'[dbo].[Compte]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Compte];
@@ -52,14 +58,17 @@ GO
 IF OBJECT_ID(N'[dbo].[Operation]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Operation];
 GO
-IF OBJECT_ID(N'[dbo].[OperationPlanning]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[OperationPlanning];
-GO
-IF OBJECT_ID(N'[dbo].[Organisme]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Organisme];
+IF OBJECT_ID(N'[dbo].[Categorie]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Categorie];
 GO
 IF OBJECT_ID(N'[dbo].[Utilisateur]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Utilisateur];
+GO
+IF OBJECT_ID(N'[dbo].[OperationPlanning]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OperationPlanning];
+GO
+IF OBJECT_ID(N'[dbo].[Procuration]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Procuration];
 GO
 
 -- --------------------------------------------------
@@ -71,7 +80,8 @@ CREATE TABLE [dbo].[Organisme] (
     [organisme_id] int IDENTITY(1,1) NOT NULL,
     [organisme_nom] nvarchar(max)  NOT NULL,
     [organisme_actif] bit  NOT NULL,
-    [organisme_abrev] nvarchar(max)  NOT NULL
+    [organisme_abrev] nvarchar(max)  NOT NULL,
+    [Utilisateur_user_id] int  NOT NULL
 );
 GO
 
@@ -112,7 +122,9 @@ GO
 CREATE TABLE [dbo].[Utilisateur] (
     [user_id] int IDENTITY(1,1) NOT NULL,
     [user_name] nvarchar(max)  NOT NULL,
-    [user_password] nvarchar(max)  NOT NULL
+    [user_password] nvarchar(max)  NOT NULL,
+    [user_dateInscription] datetime  NOT NULL,
+    [user_isAdmin] bit  NOT NULL
 );
 GO
 
@@ -124,6 +136,14 @@ CREATE TABLE [dbo].[OperationPlanning] (
     [opeplan_montant] float  NOT NULL,
     [compte_compte_id] int  NOT NULL,
     [categorie_categorie_id] int  NOT NULL
+);
+GO
+
+-- Creating table 'Procuration'
+CREATE TABLE [dbo].[Procuration] (
+    [compte_compte_id] int  NOT NULL,
+    [utilisateur_user_id] int  NOT NULL,
+    [proc_droit] int  NOT NULL
 );
 GO
 
@@ -165,6 +185,12 @@ GO
 ALTER TABLE [dbo].[OperationPlanning]
 ADD CONSTRAINT [PK_OperationPlanning]
     PRIMARY KEY CLUSTERED ([opeplan_id] ASC);
+GO
+
+-- Creating primary key on [compte_compte_id], [utilisateur_user_id] in table 'Procuration'
+ALTER TABLE [dbo].[Procuration]
+ADD CONSTRAINT [PK_Procuration]
+    PRIMARY KEY CLUSTERED ([compte_compte_id], [utilisateur_user_id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -267,6 +293,43 @@ ADD CONSTRAINT [FK_UtilisateurCategorie]
 CREATE INDEX [IX_FK_UtilisateurCategorie]
 ON [dbo].[Categorie]
     ([utilisateur_user_id]);
+GO
+
+-- Creating foreign key on [compte_compte_id] in table 'Procuration'
+ALTER TABLE [dbo].[Procuration]
+ADD CONSTRAINT [FK_CompteProcuration]
+    FOREIGN KEY ([compte_compte_id])
+    REFERENCES [dbo].[Compte]
+        ([compte_id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [utilisateur_user_id] in table 'Procuration'
+ALTER TABLE [dbo].[Procuration]
+ADD CONSTRAINT [FK_UtilisateurProcuration]
+    FOREIGN KEY ([utilisateur_user_id])
+    REFERENCES [dbo].[Utilisateur]
+        ([user_id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UtilisateurProcuration'
+CREATE INDEX [IX_FK_UtilisateurProcuration]
+ON [dbo].[Procuration]
+    ([utilisateur_user_id]);
+GO
+
+-- Creating foreign key on [Utilisateur_user_id] in table 'Organisme'
+ALTER TABLE [dbo].[Organisme]
+ADD CONSTRAINT [FK_UtilisateurOrganisme]
+    FOREIGN KEY ([Utilisateur_user_id])
+    REFERENCES [dbo].[Utilisateur]
+        ([user_id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UtilisateurOrganisme'
+CREATE INDEX [IX_FK_UtilisateurOrganisme]
+ON [dbo].[Organisme]
+    ([Utilisateur_user_id]);
 GO
 
 -- --------------------------------------------------

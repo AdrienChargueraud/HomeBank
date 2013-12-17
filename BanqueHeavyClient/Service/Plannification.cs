@@ -17,7 +17,7 @@ namespace BanqueHeavyClient.Service
             var transaction = context.Database.BeginTransaction();
             try
             {
-                var listeOperation = context.OperationPlanning.ToList();
+                var listeOperation = context.OperationPlanning.Where(m => m.Compte.utilisateur_user_id == SessionUtilisateur.Instance.ConnectedUser.user_id).ToList();
 
                 foreach (var _uneInstance in listeOperation)
                 {

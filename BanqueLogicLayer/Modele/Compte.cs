@@ -18,6 +18,7 @@ namespace BanqueLogicLayer.Modele
         {
             this.Operations = new HashSet<Operation>();
             this.OperationsPlanning = new HashSet<OperationPlanning>();
+            this.Procurations = new HashSet<Procuration>();
         }
     
         public int compte_id { get; set; }
@@ -34,5 +35,6 @@ namespace BanqueLogicLayer.Modele
         public virtual ICollection<Operation> Operations { get; set; }
         public virtual Utilisateur Utilisateur { get; set; }
         public virtual ICollection<OperationPlanning> OperationsPlanning { get; set; }
+        public virtual ICollection<Procuration> Procurations { get; set; }
     }
 }

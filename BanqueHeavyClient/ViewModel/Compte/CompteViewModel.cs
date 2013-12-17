@@ -144,7 +144,8 @@ namespace BanqueHeavyClient.ViewModel
         public void UpdateComptesFromDatabase()
         {
             Comptes = new ObservableCollection<DetailCompteViewModel>();
-            foreach (Compte _cpt in RefContexte.Compte.Where(m => m.utilisateur_user_id == SessionUtilisateur.Instance.ConnectedUser.user_id).ToList())
+            foreach (Compte _cpt in RefContexte.Compte.Where(m => m.utilisateur_user_id == SessionUtilisateur.Instance.ConnectedUser.user_id
+                                                            || m.Procurations.Any(p => p.utilisateur_user_id == SessionUtilisateur.Instance.ConnectedUser.user_id)).ToList())
                 Comptes.Add(new DetailCompteViewModel(_cpt, CategorieViewModel));
         }
 

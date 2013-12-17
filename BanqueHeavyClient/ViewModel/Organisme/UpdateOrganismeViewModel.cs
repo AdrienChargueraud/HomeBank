@@ -102,7 +102,6 @@ namespace BanqueHeavyClient.ViewModel.Organisme
                     if (RefContexte.Organisme.Where(m => m.organisme_nom.Equals(OrganismeCreation.organisme_nom)).ToList().Count > 0)
                     {
                         new Erreur("Impossible d'ajouter un organisme qui existe déjà!", "Organisme", Enums.TypeErreurMessage.AVERTISSEMENT).DisplayErreur();
-                        return;
                     }
                     RefContexte.Organisme.Add(OrganismeCreation);
                     RefContexte.SaveChanges();
@@ -119,12 +118,11 @@ namespace BanqueHeavyClient.ViewModel.Organisme
             {
                 try
                 {
-                    var tmp = RefContexte.Organisme.Where(m => m.organisme_id == OrganismeCreation.organisme_id).SingleOrDefault();
-                    if (RefContexte.Organisme.Where(m => m.organisme_nom.Equals(OrganismeCreation.organisme_nom) && m.organisme_id != OrganismeCreation.organisme_id).ToList().Count > 0)
+                    if (RefContexte.Organisme.Where(m => m.organisme_nom.Equals(OrganismeCreation.organisme_nom)).ToList().Count > 0)
                     {
                         new Erreur("Impossible d'ajouter un organisme qui existe déjà!", "Organisme", Enums.TypeErreurMessage.AVERTISSEMENT).DisplayErreur();
-                        return;
                     }
+                    var tmp = RefContexte.Organisme.Where(m => m.organisme_id == OrganismeCreation.organisme_id).SingleOrDefault();
                     tmp.organisme_nom = OrganismeCreation.organisme_nom;
                     tmp.organisme_abrev = OrganismeCreation.organisme_abrev;
                     tmp.organisme_actif = OrganismeCreation.organisme_actif;
