@@ -6,11 +6,13 @@ using System.Windows.Input;
 using BanqueLogicLayer.Modele;
 using BanqueHeavyClient.Global;
 using BanqueHeavyClient.ViewModel.Organisme;
+using System.Windows;
 
 namespace BanqueHeavyClient.ViewModel
 {
     public class HomeViewModel : BaseViewModel
     {
+        #region Initialisation
         public CompteViewModel CompteViewModel { get; set; }  
         public CategorieViewModel CategorieViewModel { get; set; }
         public ProfilViewModel ProfilViewModel { get; set; }
@@ -26,5 +28,13 @@ namespace BanqueHeavyClient.ViewModel
             OperationPlanningViewModel = new OperationPlanningViewModel();
             OrganismeViewModel = new OrganismeViewModel();
         }
+        #endregion
+
+        #region Binding
+        public Visibility IsAdmin
+        {
+            get { return SessionUtilisateur.Instance.ConnectedUser.user_isAdmin ? Visibility.Visible : Visibility.Hidden; }
+        }
+        #endregion
     }
 }
