@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/13/2013 09:17:52
--- Generated from EDMX file: C:\Users\achargueraud\Downloads\MyMiniUtility\MyMiniUtility\BanqueLogicLayer\Modele\BanqueModele.edmx
+-- Date Created: 12/16/2013 11:55:18
+-- Generated from EDMX file: C:\Users\achargueraud\Documents\GitHub\HomeBank\BanqueLogicLayer\Modele\BanqueModele.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,34 +17,34 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_OrganismeCompte]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Compte] DROP CONSTRAINT [FK_OrganismeCompte];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CompteOperation]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Operation] DROP CONSTRAINT [FK_CompteOperation];
-GO
 IF OBJECT_ID(N'[dbo].[FK_CatégorieOperation]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Operation] DROP CONSTRAINT [FK_CatégorieOperation];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UtilisateurCompte]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Compte] DROP CONSTRAINT [FK_UtilisateurCompte];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CompteOperationPlanning]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[OperationPlanning] DROP CONSTRAINT [FK_CompteOperationPlanning];
 GO
 IF OBJECT_ID(N'[dbo].[FK_CategorieOperationPlanning]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[OperationPlanning] DROP CONSTRAINT [FK_CategorieOperationPlanning];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CompteOperation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Operation] DROP CONSTRAINT [FK_CompteOperation];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CompteOperationPlanning]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OperationPlanning] DROP CONSTRAINT [FK_CompteOperationPlanning];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OrganismeCompte]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Compte] DROP CONSTRAINT [FK_OrganismeCompte];
+GO
 IF OBJECT_ID(N'[dbo].[FK_UtilisateurCategorie]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Categorie] DROP CONSTRAINT [FK_UtilisateurCategorie];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UtilisateurCompte]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Compte] DROP CONSTRAINT [FK_UtilisateurCompte];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Organisme]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Organisme];
+IF OBJECT_ID(N'[dbo].[Categorie]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Categorie];
 GO
 IF OBJECT_ID(N'[dbo].[Compte]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Compte];
@@ -52,14 +52,14 @@ GO
 IF OBJECT_ID(N'[dbo].[Operation]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Operation];
 GO
-IF OBJECT_ID(N'[dbo].[Categorie]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Categorie];
+IF OBJECT_ID(N'[dbo].[OperationPlanning]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OperationPlanning];
+GO
+IF OBJECT_ID(N'[dbo].[Organisme]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Organisme];
 GO
 IF OBJECT_ID(N'[dbo].[Utilisateur]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Utilisateur];
-GO
-IF OBJECT_ID(N'[dbo].[OperationPlanning]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[OperationPlanning];
 GO
 
 -- --------------------------------------------------
