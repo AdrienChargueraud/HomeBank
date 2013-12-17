@@ -19,37 +19,37 @@
         </Grid.RowDefinitions>
 
         <TabControl Grid.Row="0" Grid.ColumnSpan="3">
-            <TabItem Header="MON PROFIL">
+            <TabItem Header="MON PROFIL" GotFocus="TabItem_GotFocus" Tag="0">
                 <TabItem.Content>
                     <my:Profil DataContext="{Binding ProfilViewModel}" Margin="2" Grid.Row="0"></my:Profil>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Header="MES COMPTES">
+            <TabItem Header="MES COMPTES" GotFocus="TabItem_GotFocus" Tag="1">
                 <TabItem.Content>
                     <my:Compte DataContext="{Binding CompteViewModel}" Margin="2" Grid.Row="0"></my:Compte>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Header="MES CATEGORIES">
+            <TabItem Header="MES CATEGORIES" GotFocus="TabItem_GotFocus" Tag="2">
                 <TabItem.Content>
                     <my:Categorie DataContext="{Binding CategorieViewModel}" Margin="2" Grid.Row="0"></my:Categorie>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Header="MES OPERATIONS PLANNIFIEES">
+            <TabItem Header="MES OPERATIONS PLANNIFIEES" GotFocus="TabItem_GotFocus" Tag="3">
                 <TabItem.Content>
                     <my:OperationPlanning DataContext="{Binding OperationPlanningViewModel}" Margin="2" Grid.Row="0"></my:OperationPlanning>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Header="ORGANISMES">
+            <TabItem Header="ORGANISMES" GotFocus="TabItem_GotFocus" Tag="4">
                 <TabItem.Content>
                     <my:Organisme DataContext="{Binding OrganismeViewModel}" Margin="2" Grid.Row="0"></my:Organisme>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Header="MES PROCURATIONS">
+            <TabItem Header="MES PROCURATIONS" GotFocus="TabItem_GotFocus" Tag="5">
                 <TabItem.Content>
                     <my:Procuration DataContext="{Binding ProcurationViewModel}" Margin="2" Grid.Row="0"></my:Procuration>
                 </TabItem.Content>
             </TabItem>
-            <TabItem Header=" GESTION UTILISATEURS" Visibility="{Binding IsAdmin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
+            <TabItem Header="GESTION UTILISATEURS" Visibility="{Binding IsAdmin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" GotFocus="TabItem_GotFocus" Tag="6">
 
             </TabItem>
         </TabControl>

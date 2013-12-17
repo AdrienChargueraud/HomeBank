@@ -127,6 +127,7 @@
     <Compile Include="ViewModel\Organisme\DetailOrganismeViewModel.cs" />
     <Compile Include="ViewModel\Organisme\OrganismeViewModel.cs" />
     <Compile Include="ViewModel\Organisme\UpdateOrganismeViewModel.cs" />
+    <Compile Include="ViewModel\Procuration\ProcurationDetailViewModel.cs" />
     <Compile Include="ViewModel\Procuration\ProcurationViewModel.cs" />
     <Compile Include="ViewModel\Profil\LoginViewModel.cs" />
     <Compile Include="ViewModel\OperationPlanning\DetailOperationPlanningViewModel.cs" />

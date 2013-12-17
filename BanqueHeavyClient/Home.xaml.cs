@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Globalization;
-using System.Threading;
+using BanqueHeavyClient.ViewModel;
+using System;
 
 namespace BanqueHeavyClient
 {
@@ -23,7 +13,12 @@ namespace BanqueHeavyClient
         public Home()
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.HomeViewModel();
+        }
+
+        private void TabItem_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TabItem item = (TabItem)sender;
+            ((HomeViewModel)this.DataContext).Refresh(Convert.ToInt32(item.Tag));
         }
     }
 }

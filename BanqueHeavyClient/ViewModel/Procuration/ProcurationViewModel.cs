@@ -5,6 +5,7 @@ using System.Text;
 using BanqueHeavyClient.Global;
 using BanqueLogicLayer.Modele;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace BanqueHeavyClient.ViewModel.Procuration
 {
@@ -35,6 +36,7 @@ namespace BanqueHeavyClient.ViewModel.Procuration
 
         private void ExtractProcurationMoiVersAutre()
         {
+            ProcurationVersAutre = new ObservableCollection<ProcurationDetailViewModel>();
             var proc = RefContexte.Procuration.Where(m => m.utilisateur_user_id == SessionUtilisateur.Instance.ConnectedUser.user_id).ToList();
             ProcurationVersAutre.Clear();
             foreach (var element in proc)
@@ -46,6 +48,7 @@ namespace BanqueHeavyClient.ViewModel.Procuration
 
         private void ExtractProcurationAutreVersMoi()
         {
+            ProcurationVersMoi = new ObservableCollection<ProcurationDetailViewModel>();
             var idList = RefContexte.Compte.Where(a => a.utilisateur_user_id == SessionUtilisateur.Instance.ConnectedUser.user_id).Select(m => m.compte_id).ToList();
             var proc = RefContexte.Procuration.Where(x => idList.Contains(x.compte_compte_id)).ToList();
             ProcurationVersMoi.Clear();
@@ -55,6 +58,20 @@ namespace BanqueHeavyClient.ViewModel.Procuration
             }
             OnPropertyChanged("ProcurationVersMoi");
         }
+
+        #endregion
+
+        #region Binding
+
+        #region Binding
+        public Visibility IsBoutonActif
+        {
+            get
+            {
+                return ((ProcVM_Selection != null) ? Visibility.Visible : Visibility.Hidden);
+            }
+        }
+        #endregion
 
         #endregion
     }

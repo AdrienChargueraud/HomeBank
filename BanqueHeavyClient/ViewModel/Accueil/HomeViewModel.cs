@@ -39,5 +39,36 @@ namespace BanqueHeavyClient.ViewModel
             get { return SessionUtilisateur.Instance.ConnectedUser.user_isAdmin ? Visibility.Visible : Visibility.Hidden; }
         }
         #endregion
+
+        #region Refresh
+        public void Refresh(int onglet)
+        {
+            if (onglet.Equals(Convert.ToInt32(Enums.Onglet.PROCURATION)))
+            {
+                ProcurationViewModel = new ProcurationViewModel();
+                OnPropertyChanged("ProcurationViewModel");
+            }
+            if (onglet.Equals(Convert.ToInt32(Enums.Onglet.COMPTE)))
+            {
+                CompteViewModel = new CompteViewModel(CategorieViewModel);
+                OnPropertyChanged("CompteViewModel");
+            }
+            if (onglet.Equals(Convert.ToInt32(Enums.Onglet.CATEGORIE)))
+            {
+                CategorieViewModel = new CategorieViewModel();
+                OnPropertyChanged("CategorieViewModel");
+            }
+            if (onglet.Equals(Convert.ToInt32(Enums.Onglet.CATEGORIEPLAN)))
+            {
+                OperationPlanningViewModel = new OperationPlanningViewModel();
+                OnPropertyChanged("OperationPlanningViewModel");
+            }
+            if (onglet.Equals(Convert.ToInt32(Enums.Onglet.ORGANISME)))
+            {
+                OrganismeViewModel = new OrganismeViewModel();
+                OnPropertyChanged("OrganismeViewModel");
+            }
+        }
+        #endregion
     }
 }

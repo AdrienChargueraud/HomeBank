@@ -23,5 +23,10 @@ namespace BanqueHeavyClient.View
         {
             InitializeComponent();
         }
+
+        private void Label_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+
+        }
     }
 }

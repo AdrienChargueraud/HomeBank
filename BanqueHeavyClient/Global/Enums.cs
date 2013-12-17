@@ -30,5 +30,16 @@ namespace BanqueHeavyClient.Global
             NEW = 0,
             UPDATE = 1
         }
+
+        public enum Onglet : int
+        {
+            PROFIL = 0,
+            COMPTE = 1,
+            CATEGORIE = 2, 
+            CATEGORIEPLAN = 3,
+            ORGANISME = 4,
+            PROCURATION = 5,
+            UTILISATEUR = 6
+        }
     }
 }
