@@ -127,6 +127,7 @@
     <Compile Include="ViewModel\Organisme\DetailOrganismeViewModel.cs" />
     <Compile Include="ViewModel\Organisme\OrganismeViewModel.cs" />
     <Compile Include="ViewModel\Organisme\UpdateOrganismeViewModel.cs" />
+    <Compile Include="ViewModel\Procuration\ProcurationViewModel.cs" />
     <Compile Include="ViewModel\Profil\LoginViewModel.cs" />
     <Compile Include="ViewModel\OperationPlanning\DetailOperationPlanningViewModel.cs" />
     <Compile Include="ViewModel\OperationPlanning\OperationPlanningViewModel.cs" />
@@ -168,6 +169,9 @@
     </Compile>
     <Compile Include="View\OrganismeUpdate.xaml.cs">
       <DependentUpon>OrganismeUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Procuration.xaml.cs">
+      <DependentUpon>Procuration.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Profil.xaml.cs">
       <DependentUpon>Profil.xaml</DependentUpon>
@@ -235,6 +239,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Procuration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Profil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -257,6 +265,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>

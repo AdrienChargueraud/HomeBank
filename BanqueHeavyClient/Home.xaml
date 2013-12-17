@@ -45,7 +45,9 @@
                 </TabItem.Content>
             </TabItem>
             <TabItem Header="MES PROCURATIONS">
-
+                <TabItem.Content>
+                    <my:Procuration DataContext="{Binding ProcurationViewModel}" Margin="2" Grid.Row="0"></my:Procuration>
+                </TabItem.Content>
             </TabItem>
             <TabItem Header=" GESTION UTILISATEURS" Visibility="{Binding IsAdmin, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
 

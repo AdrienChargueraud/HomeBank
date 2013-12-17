@@ -7,6 +7,7 @@ using BanqueLogicLayer.Modele;
 using BanqueHeavyClient.Global;
 using BanqueHeavyClient.ViewModel.Organisme;
 using System.Windows;
+using BanqueHeavyClient.ViewModel.Procuration;
 
 namespace BanqueHeavyClient.ViewModel
 {
@@ -18,6 +19,7 @@ namespace BanqueHeavyClient.ViewModel
         public ProfilViewModel ProfilViewModel { get; set; }
         public OperationPlanningViewModel OperationPlanningViewModel { get; set; }
         public OrganismeViewModel OrganismeViewModel { get; set; }
+        public ProcurationViewModel ProcurationViewModel { get; set; }
 
         public HomeViewModel() : base()
         {
@@ -27,6 +29,7 @@ namespace BanqueHeavyClient.ViewModel
             ProfilViewModel = new ProfilViewModel();
             OperationPlanningViewModel = new OperationPlanningViewModel();
             OrganismeViewModel = new OrganismeViewModel();
+            ProcurationViewModel = new ProcurationViewModel();
         }
         #endregion
 
