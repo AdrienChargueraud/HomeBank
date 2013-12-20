@@ -46,8 +46,6 @@ namespace BanqueHeavyClient.ViewModel
 
         public string CurrentYear { get; set; }
 
-        public CategorieViewModel CategorieViewModel { get; set; }
-
         public string ColorMajoration { get; set; }
 
         #endregion
@@ -101,10 +99,9 @@ namespace BanqueHeavyClient.ViewModel
         #endregion
 
         #region New and wen
-        public DetailCompteViewModel(Compte compte, CategorieViewModel categorieVm)
+        public DetailCompteViewModel(Compte compte)
         {
             RefContexte = SessionUtilisateur.Instance.banqueContexte;
-            CategorieViewModel = categorieVm;
             SelectedCompte = compte;
             Year = new ObservableCollection<string>();
             AddYear();
@@ -299,7 +296,6 @@ namespace BanqueHeavyClient.ViewModel
                     ExtractOperation();
                     MiseAJourOperation();
                     MiseAJourDate();
-                    CategorieViewModel.ExtractOperations();
                 }
                 catch (Exception)
                 {

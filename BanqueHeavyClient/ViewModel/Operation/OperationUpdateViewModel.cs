@@ -152,7 +152,7 @@ namespace BanqueHeavyClient.ViewModel
             CompteVm.ExtractOperation();
             CompteVm.MiseAJourDate();
             CompteVm.MiseAJourOperation();
-            CompteVm.CategorieViewModel.ExtractOperations();
+            //CompteVm.CategorieViewModel.ExtractOperations(); INUTILE (rafraichissement évènement binding)
             CloseWindows();
         }
 

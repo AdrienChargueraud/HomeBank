@@ -25,7 +25,7 @@ namespace BanqueHeavyClient.ViewModel
         {
             SessionUtilisateur.Instance.Plannificateur.UpdateProgrammation();
             CategorieViewModel = new CategorieViewModel();
-            CompteViewModel = new CompteViewModel(CategorieViewModel);
+            CompteViewModel = new CompteViewModel();
             ProfilViewModel = new ProfilViewModel();
             OperationPlanningViewModel = new OperationPlanningViewModel();
             OrganismeViewModel = new OrganismeViewModel();
@@ -50,7 +50,7 @@ namespace BanqueHeavyClient.ViewModel
             }
             if (onglet.Equals(Convert.ToInt32(Enums.Onglet.COMPTE)))
             {
-                CompteViewModel = new CompteViewModel(CategorieViewModel);
+                CompteViewModel = new CompteViewModel();
                 OnPropertyChanged("CompteViewModel");
             }
             if (onglet.Equals(Convert.ToInt32(Enums.Onglet.CATEGORIE)))

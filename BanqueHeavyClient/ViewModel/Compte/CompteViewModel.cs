@@ -36,18 +36,15 @@ namespace BanqueHeavyClient.ViewModel
             }
         }
 
-        public CategorieViewModel CategorieViewModel { get; set; }
-
         private BanqueContainer RefContexte { get; set; }
 
         #endregion
 
         #region New and wen
 
-        public CompteViewModel(CategorieViewModel categorieVm)
+        public CompteViewModel()
         {
             RefContexte = SessionUtilisateur.Instance.banqueContexte;
-            CategorieViewModel = categorieVm;
             UpdateComptesFromDatabase();
             if(Comptes.Count > 0)
                 SelectionCompte = Comptes.ElementAt(0);
@@ -146,7 +143,7 @@ namespace BanqueHeavyClient.ViewModel
             Comptes = new ObservableCollection<DetailCompteViewModel>();
             foreach (Compte _cpt in RefContexte.Compte.Where(m => m.utilisateur_user_id == SessionUtilisateur.Instance.ConnectedUser.user_id
                                                             || m.Procurations.Any(p => p.utilisateur_user_id == SessionUtilisateur.Instance.ConnectedUser.user_id)).ToList())
-                Comptes.Add(new DetailCompteViewModel(_cpt, CategorieViewModel));
+                Comptes.Add(new DetailCompteViewModel(_cpt));
         }
 
         #endregion   
